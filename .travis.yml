@@ -1,0 +1,13 @@
+language: go
+services:
+- docker
+script:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker build -t klumhru/docker-daemon:$(git rev-parse --short HEAD) .
+- docker tag klumhru/docker-daemon:$(git rev-parse --short HEAD) klumhru/docker-daemon:latest
+- docker push klumhru/docker-daemon:$(git rev-parse --short HEAD)
+- docker push klumhru/docker-daemon:latest
+env:
+  global:
+  - secure: HMhWQodvGz50vt0IZqRJowQ81mI5XuAui8cariN/LZbufiN4fqIU2++iwEBMLW/HE0Nbwwf7OHo+rL9e2KmLuDPzQNbE32OPRCoDecT2CV3ghf+O97a3dIIjyfqpIwwBxe1pnkastHX93UjCUtPf3xa4XF0BrKcpa/9TpYJYyqWljk2/5a68PqlUJU0S0BddCQsECCdqWj4uTRU4Ja4CKQ+4YWZNgRPk9x1unY1ahldhxmdzWK2tDa77s3SCp01D84OUQJYQj3RFI4Tjtf0HzCLrISeltRSuTIAgYRpWEwSVhGHnDaVcMpP0ffljr8rfqehcKPg0Q7wzfh8mKm62u3wFpKytzhmpeVUQGrSN+YMaX0yGHzM8mfS97opHbbkg03rcKW1K7ChAlpK9Z6LnqtDPjxNxpeElQhC3u9fSZ1p23lAFZf/+AdSgjbXnB7FPYkDIz00nZl/b68ciWpO5+09/OPUPgCO5DkyZPUwk/AP7BzDU/6tEAEN9CkKQ8hjHPmVxCYLysnulq92GSIAhJjkssvMiuA5g4vyQ3Z6nknBe9EU5ZCq5QMYQiedxS18ELSg0X3gpc9tCgwHjSnDuAP+OrvGAnIjkjZDuPa8cuefncRlT43cNj1SoRcaHcdO5e8Ynu29BOxuVBctvbqjyRkGngWfUJL/zOyWwcrIOnT8=
+  - secure: VZBcQ4lLkhz4uSa6OZ7D2UfHLflv+QgTbF54s8MxeKsM5z5/+zCsSFmJmFMiFNJxbMOcbjQp1Tof7Zc+RRz4Hv6n7Mmcfj0vWvKfRmDjhL3VdkgvDBaykqptLiAVhzYx6wquflFACvUuXoer+gAs0oHuYL79no858tRirnTNtf4TnfcoacMJBe7G+C5hpydv4goQpsc3uM0JUFn8QJKs+VPhisr55giqwvs7uSi+/9rUu8Hwr/SUsWSXLrWQbowWbmD0HhEpt5UOp6w0aFN+0ir7ToFStARak/VxMq+3BIVNGtBjos40J6O45yrv6OegJj2H7G5SlzZPCaKinS2wbeYEuBCglrK2v9U7lgi1i7bMvczgGxmGjBS8aOlZsWeZOWTwdXvKV3NJQO1yhfuSbEtLyHEn+baWDiy+VA+YwouXJ9I6OGmjYUZyajBxEWqZcmRFw/qMGIKLXsyyk898MNxV4kGs5cyPVkpHOXxRp2tzs7PBg6Z27Rhw/13ROACW4Kqewid2ep3yHVZ49pxjaN44FNhzu7SJft35VA2YifJ2S4G0dxMGglHHWn8MDm6eUPKQ5a9cmez94XaUSkIxZxMvMRGkt3/pcTURiGNARX8O2E/tS3MTm6Yez/LHTPPbdFfo1dRRC2m1A4IwZ5opapO4rX//mV612f1gkYMKe/o=
